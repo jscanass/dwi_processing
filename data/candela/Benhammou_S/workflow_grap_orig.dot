@@ -1,0 +1,17 @@
+strict digraph  {
+"bet (fsl)";
+"n4bias (N4Bias)";
+"segmentation (fsl)";
+"linear_warp_estimation (fsl)";
+"registration_fmri (fsl)";
+"wm_mask_threshold (fsl)";
+"nonlinear_warp_estimation (fsl)";
+"bet (fsl)" -> "n4bias (N4Bias)";
+"n4bias (N4Bias)" -> "segmentation (fsl)";
+"n4bias (N4Bias)" -> "linear_warp_estimation (fsl)";
+"n4bias (N4Bias)" -> "registration_fmri (fsl)";
+"segmentation (fsl)" -> "wm_mask_threshold (fsl)";
+"linear_warp_estimation (fsl)" -> "nonlinear_warp_estimation (fsl)";
+"wm_mask_threshold (fsl)" -> "nonlinear_warp_estimation (fsl)";
+"nonlinear_warp_estimation (fsl)" -> "registration_fmri (fsl)";
+}

@@ -1,0 +1,18 @@
+digraph structs {
+node [shape=record];
+preproc_dwibet [label="{IN}|{ bet | fsl |  }|{OUT|<outoutfile> out_file}"];
+coregwfn4bias [label="{IN|<ininfile> in_file}|{ n4bias | N4Bias |  }|{OUT|<outoutfile> out_file}"];
+coregwflinear_warp_estimation [label="{IN|<inreference> reference}|{ linear_warp_estimation | fsl |  }|{OUT|<outoutmatrixfile> out_matrix_file}"];
+coregwfsegmentation [label="{IN|<ininfiles> in_files}|{ segmentation | fsl |  }|{OUT|<outpartialvolumefiles> partial_volume_files}"];
+coregwfwm_mask_threshold [label="{IN|<ininfile> in_file}|{ wm_mask_threshold | fsl |  }|{OUT|<outoutfile> out_file}"];
+coregwfnonlinear_warp_estimation [label="{IN|<ininmatrixfile> in_matrix_file|<inwmseg> wm_seg}|{ nonlinear_warp_estimation | fsl |  }|{OUT|<outoutmatrixfile> out_matrix_file}"];
+coregwfregistration_fmri [label="{IN|<ininmatrixfile> in_matrix_file|<inreference> reference}|{ registration_fmri | fsl |  }|{OUT}"];
+coregwflinear_warp_estimation:outoutmatrixfile:e -> coregwfnonlinear_warp_estimation:ininmatrixfile:w;
+coregwfn4bias:outoutfile:e -> coregwflinear_warp_estimation:inreference:w;
+coregwfn4bias:outoutfile:e -> coregwfregistration_fmri:inreference:w;
+coregwfn4bias:outoutfile:e -> coregwfsegmentation:ininfiles:w;
+coregwfnonlinear_warp_estimation:outoutmatrixfile:e -> coregwfregistration_fmri:ininmatrixfile:w;
+coregwfsegmentation:outpartialvolumefiles:e -> coregwfwm_mask_threshold:ininfile:w;
+coregwfwm_mask_threshold:outoutfile:e -> coregwfnonlinear_warp_estimation:inwmseg:w;
+preproc_dwibet:outoutfile:e -> coregwfn4bias:ininfile:w;
+}

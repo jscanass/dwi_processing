@@ -1,0 +1,18 @@
+digraph coregwf{
+  label="coregwf";
+  preproc_dwi_bet[label="bet (fsl)"];
+  coregwf_n4bias[label="n4bias (N4Bias)"];
+  coregwf_linear_warp_estimation[label="linear_warp_estimation (fsl)"];
+  coregwf_segmentation[label="segmentation (fsl)"];
+  coregwf_wm_mask_threshold[label="wm_mask_threshold (fsl)"];
+  coregwf_nonlinear_warp_estimation[label="nonlinear_warp_estimation (fsl)"];
+  coregwf_registration_fmri[label="registration_fmri (fsl)"];
+  coregwf_n4bias -> coregwf_segmentation;
+  coregwf_n4bias -> coregwf_linear_warp_estimation;
+  coregwf_n4bias -> coregwf_registration_fmri;
+  coregwf_linear_warp_estimation -> coregwf_nonlinear_warp_estimation;
+  coregwf_segmentation -> coregwf_wm_mask_threshold;
+  coregwf_wm_mask_threshold -> coregwf_nonlinear_warp_estimation;
+  coregwf_nonlinear_warp_estimation -> coregwf_registration_fmri;
+  preproc_dwi_bet -> coregwf_n4bias;
+}
